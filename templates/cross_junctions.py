@@ -31,6 +31,13 @@ def cross_junctions(I, bpoly, Wpts):
     """
     #--- FILL ME IN ---
 
+    # Steps:
+    # 1. Fit the Lucesse Equation
+    # 2. Harris Corner Detector for Cross Junctions
+    # 3. Saddle points
+
+    
+
     # Code goes here...
 
     #------------------
