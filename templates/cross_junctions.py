@@ -29,18 +29,8 @@ def cross_junctions(I, bpoly, Wpts):
     Ipts  - 2xn np.array of cross-junctions (x, y), relative to the upper
             left corner of the target. The array must contain float64 values.
     """
-    #--- FILL ME IN ---
 
-    # Steps:
-    # 1. Fit the Lucesse Equation
-    # 2. Harris Corner Detector for Cross Junctions
-    # 3. Saddle points
 
-    
-
-    # Code goes here...
-
-    #------------------
 
     correct = isinstance(Ipts, np.ndarray) and \
         Ipts.dtype == np.float64 and Ipts.shape[0] == 2
