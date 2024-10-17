@@ -29,7 +29,12 @@ def cross_junctions(I, bpoly, Wpts):
     Ipts  - 2xn np.array of cross-junctions (x, y), relative to the upper
             left corner of the target. The array must contain float64 values.
     """
-
+    # Origin: Top left cross junction
+    # x-axis: Right
+    # y-axis: Down
+    # z-axis: Into page
+    # Number of Targets: size of Wpts
+    targets = Wpts.shape[1]
 
 
     correct = isinstance(Ipts, np.ndarray) and \
