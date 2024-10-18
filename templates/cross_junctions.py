@@ -6,6 +6,22 @@ from matplotlib.path import Path
 from matplotlib import pyplot as plt
 
 def create_patch(image, point, patch_size):
+    """
+    Find patch size around a point.
+
+    Given an image, a valid point within the image and a patch size,
+    return the patch that has a window on x and y of patch size around the centred point.
+
+    Parameters:
+    ----------- 
+    image        - Single-band (greyscale) image as np.array (e.g., uint8, float).
+    point        - 2x1 np array (x,y) point corresponding to centre of patch.
+    patch_size   - size of patch around the point.
+
+    Returns:
+    --------
+    patch - Single-band (greyscale) image as np.array.
+    """
 
     # Find patch coordinates ensuring they are within bound of image
     patch_y1 = int(max(point[1] - patch_size, 0))
@@ -16,6 +32,26 @@ def create_patch(image, point, patch_size):
     return image[patch_y1:patch_y2, patch_x1:patch_x2]
 
 def saddle_point_copy(I):
+    # Same function as function in part1 just copied over and renamed
+    """
+    Locate saddle point in an image patch.
+
+    The function identifies the subpixel centre of a cross-junction in the
+    image patch I, by fitting a hyperbolic paraboloid to the patch, and then 
+    finding the critical point of that paraboloid.
+
+    Note that the location of 'pt' is relative to (-0.5, -0.5) at the upper
+    left corner of the patch, i.e., the pixels are treated as covering an 
+    area of one unit square.
+
+    Parameters:
+    -----------
+    I  - Single-band (greyscale) image patch as np.array (e.g., uint8, float).
+
+    Returns:
+    --------
+    pt  - 2x1 np.array (float64), subpixel location of saddle point in I (x, y).
+    """
     num_pixels = I.shape[0]*I.shape[1]
     A = np.zeros((num_pixels, 6))
     b = np.zeros(num_pixels)
@@ -61,6 +97,22 @@ def saddle_point_copy(I):
     return pt
 
 def refine_saddle_point(image, point, patch_size):
+    """
+    Find saddle point from a patch.
+
+    Given an image, a valid point within the image and a patch size,
+    find the saddle point in a window of patch size around the point.
+
+    Parameters:
+    ----------- 
+    image        - Single-band (greyscale) image as np.array (e.g., uint8, float).
+    point        - 2x1 np array (x,y) point corresponding to estimated cross junction point.
+    patch_size   - size of patch to look for saddle point around the point.
+
+    Returns:
+    --------
+    saddle_point - 2x1 np array (x,y) of saddle point in image.
+    """
     
     patch = create_patch(image, point, patch_size)
     patch = gaussian_filter(patch,4) # Chosen standard deviation from Luccesse paper

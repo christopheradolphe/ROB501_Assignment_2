@@ -22,13 +22,13 @@ def saddle_point(I):
     pt  - 2x1 np.array (float64), subpixel location of saddle point in I (x, y).
     """
 
-    # Steps:
     # 1. Solve the Parameters in Luccesse Equation using Linear Least squares
-    # Solving Ax = b
+    # Solving Ax = b where:
     # A = [x^2, x*y, , y^2, x, y, 1]
     # x = [alpha, beta, gamma, delta, epsilon, zeta]
     # b = intensity
     
+    # Create empty arrays to be populated for A and b
     num_pixels = I.shape[0]*I.shape[1]
     A = np.zeros((num_pixels, 6))
     b = np.zeros(num_pixels)
@@ -47,6 +47,8 @@ def saddle_point(I):
     
     # Solve least squares
     x, _, _, _ = lstsq(A,b)
+
+    # Extract the parameters
     alpha = x[0]
     beta = x[1]
     gamma = x[2]
@@ -56,7 +58,7 @@ def saddle_point(I):
 
     
     # 2. Find the coordinates of the Saddle Point
-    # Use formula from Luccesse Paper
+    # Use the formula from Luccesse Paper
     saddle_matrix = inv(
                         np.array([[2* alpha, beta],
                                     [beta, 2 * gamma]])
