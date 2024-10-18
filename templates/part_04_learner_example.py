@@ -7,13 +7,13 @@ from dcm_from_rpy import dcm_from_rpy
 K = np.array([[564.9, 0, 337.3], [0, 564.3, 226.5], [0, 0, 1]])
 
 # Load landmark points (3D - ground truth).
-Wpts = np.load('../data/world_pts.npy')
+Wpts = np.load('data/world_pts.npy')
 
 # Load initial guess for camera pose.
-Twc_guess = np.load('../data/camera_pose_guess_01.npy')
+Twc_guess = np.load('data/camera_pose_guess_01.npy')
 
 # Load detected cross-junctions (2D - in image).
-Ipts = np.load('../data/cross_junctions_01.npy')
+Ipts = np.load('data/cross_junctions_01.npy')
 
 Twc = pose_estimate_nls(K, Twc_guess, Ipts, Wpts)
 print(Twc)
