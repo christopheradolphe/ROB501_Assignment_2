@@ -24,8 +24,15 @@ def find_jacobian(K, Twc, Wpt):
     J  - 2x6 np.array, Jacobian matrix (columns are tx, ty, tz, r, p, q).
          The Jacobian must contain float64 values.
     """
+    # Initial Guess: +/-10 degrees and 20cm
 
-    
+    # Steps to compute Jacobian
+    # 1. Forward Projection (using the initial guess given in question) -> xproj
+    # 2. Compute the Residuals (r = xobs - xproj)
+    # 3. Compute the partial derivatives with respect to pose parameter
+    # 4. Organize partial derivatives into a 2 x 6 matrix
+
+
 
     correct = isinstance(J, np.ndarray) and \
         J.dtype == np.float64 and J.shape == (2, 6)
