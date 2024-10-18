@@ -24,11 +24,8 @@ def find_jacobian(K, Twc, Wpt):
     J  - 2x6 np.array, Jacobian matrix (columns are tx, ty, tz, r, p, q).
          The Jacobian must contain float64 values.
     """
-    #--- FILL ME IN ---
- 
-    # Code goes here...
 
-    #------------------
+    
 
     correct = isinstance(J, np.ndarray) and \
         J.dtype == np.float64 and J.shape == (2, 6)
